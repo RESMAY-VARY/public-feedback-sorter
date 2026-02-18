@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FeedbackFlow AI | Smart Public Insight Sorting</title>
+    <meta name="description" content="AI-enhanced sorting for public feedback. Organizes emails, comments, and survey responses into actionable themes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <div class="logo">
+          <div class="logo-icon"></div>
+          <h1>FeedbackFlow<span>AI</span></h1>
+        </div>
+        <nav>
+          <button id="import-btn" class="secondary-btn">Import Data</button>
+          <button id="analyze-btn" class="primary-btn">Analyze Themes</button>
+        </nav>
+      </header>
+
+      <main>
+        <aside class="sidebar">
+          <div class="stat-card">
+            <span class="label">Total Feedback</span>
+            <span class="value" id="total-count">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="label">Duplicates Removed</span>
+            <span class="value" id="duplicate-count">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="label">Primary Themes</span>
+            <span class="value" id="theme-count">0</span>
+          </div>
+
+          <div class="filter-section">
+            <h3>Filters</h3>
+            <div class="filter-group">
+              <label>Source</label>
+              <select id="source-filter">
+                <option value="all">All Sources</option>
+                <option value="email">Emails</option>
+                <option value="comment">Comments</option>
+                <option value="survey">Surveys</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Status</label>
+              <div class="checkbox-list">
+                <label><input type="checkbox" checked value="new"> New</label>
+                <label><input type="checkbox" checked value="grouped"> Grouped</label>
+                <label><input type="checkbox" checked value="flagged"> Flagged</label>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <section class="content-area">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="feed">Raw Feed</button>
+            <button class="tab-btn" data-tab="clusters">Thematic Groups</button>
+            <button class="tab-btn" data-tab="duplicates">Duplicate Archive</button>
+          </div>
+
+          <div class="tab-content active" id="feed-tab">
+            <div class="search-bar">
+              <input type="text" placeholder="Search feedback entries..." id="feedback-search">
+            </div>
+            <div id="feedback-list" class="feedback-grid">
+              <!-- Dynamically populated -->
+              <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Waiting for data import...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="clusters-tab">
+            <div id="clusters-list" class="clusters-grid">
+              <!-- Clusters will appear here -->
+              <p class="placeholder-text">Run analysis to identify clusters</p>
+            </div>
+          </div>
+
+          <div class="tab-content" id="duplicates-tab">
+             <div id="duplicates-list" class="duplicates-grid">
+               <p class="placeholder-text">No duplicates identified yet</p>
+             </div>
+          </div>
+        </section>
+      </main>
+
+      <div id="modal-container" class="modal-hidden">
+        <div class="modal">
+          <div class="modal-header">
+            <h2>Process Feedback</h2>
+            <button class="close-modal">&times;</button>
+          </div>
+          <div class="modal-body" id="modal-content">
+            <!-- Modal content -->
+          </div>
+        </div>
+      </div>
+
+      <div id="toast-container"></div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
